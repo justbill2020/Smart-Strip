@@ -16,7 +16,9 @@
     "Smart Strip",
     "IoT",
     "WS2812b LED Strip",
-    "DIY"
+    "DIY",
+    "blynk",
+    "ifttt"
   ],
   "author": "Bill Martin",
   "license": "MIT",
