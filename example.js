@@ -1,5 +1,5 @@
 var five = require("johnny-five");
-var pixel = require("node-pixel.js");
+var pixel = require("node-pixel");
 
 var opts = {};
 opts.port = process.argv[2] || "";
