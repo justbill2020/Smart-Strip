@@ -1,10 +1,13 @@
 var five = require("johnny-five");
 var pixel = require("node-pixel");
+var raspi = require("raspi-io");
 
 var opts = {};
 opts.port = process.argv[2] || "";
 
-var board = new five.Board(opts);
+var board = new five.Board({
+    io: new raspi()
+});
 var strip = null;
 
 var fps = 20; // how many frames per second do you want to try?
