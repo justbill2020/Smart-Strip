@@ -43,7 +43,7 @@ board.on("ready", function() {
                 }
 
                 strip.show();
-            } (e) {
+            } catch (e) {
                 console.log(e)
             }
         }, 1000/fps);
