@@ -41,7 +41,11 @@ board.on("ready", function() {
 
             for(var i = 0; i < strip.length; i++) {
                 showColor = colorWheel( ( cwi+i ) & 255 );
-                strip.pixel( i ).color( showColor );
+                try {
+                    strip.pixel( i ).color( showColor );
+                } catch (e) {
+                    console.log(e)
+                }
             }
             strip.show();
         }, 1000/delay);
