@@ -20,7 +20,7 @@ board.on("ready", function() {
         color_order: pixel.COLOR_ORDER.GRB,
         board: this,
         controller: "I2CBACKPACK",
-        strips: [5],
+        strips: [300],
     });
 
     strip.on("ready", function() {
