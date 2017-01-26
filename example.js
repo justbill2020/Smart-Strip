@@ -26,13 +26,13 @@ board.on("ready", function() {
     strip.on("ready", function() {
         board.on("exit", function(){
             strip.color("black")
-            strip.show
+            strip.show()
         })
         console.log("Strip ready, let's go");
         strip.color("#000"); // blanks it out
         console.log("#000")
         strip.show()
-        strip.color("white")
+        strip.color("#fff")
         strip.show()
 
     });
