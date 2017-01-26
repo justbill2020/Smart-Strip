@@ -25,6 +25,7 @@ board.on("ready", function() {
 
     strip.on("ready", function() {
         console.log("Strip ready, let's go");
+        strip.color("#000"); // blanks it out
         dynamicRainbow(fps);
     });
 
