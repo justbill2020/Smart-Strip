@@ -39,6 +39,7 @@ board.on("ready", function() {
                         if (++current_colors[i] >= colors.length) current_colors[i] = 0;
                     }
                     strip.pixel(current_pos[i]).color(colors[current_colors[i]]);
+                    console.log('pos/color: '+current_pos,colors[current_colors[i]])
                 }
 
                 strip.show();
