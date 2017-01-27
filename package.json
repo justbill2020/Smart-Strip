@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "sudo node main.js",
+    "debug": "git pull && sudo node --debug-brk main.js",
     "update": "git pull && npm install",
     "interchange": "./node_modules/nodebots_interchange/bin/cli.js",
     "test": "eslint ."
@@ -36,7 +37,8 @@
     "johnny-five": "^0.10.6",
     "node-pixel": "^0.9.1",
     "raspi-io": "^7.2.3",
-    "nodebots-interchange":"^1.1.6"
+    "nodebots-interchange":"^1.1.6",
+    "blynk-library": "^0.4.5"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
