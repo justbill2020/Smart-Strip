@@ -1,18 +1,22 @@
 {
-  "name": "smart-mirror",
-  "version": "0.0.10",
-  "description": "The fairest of them all",
+  "name": "stella",
+  "version": "0.0.1",
+  "description": "the start of something cool",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js ",
+    "start": "sudo node main.js",
+    "debug": "git pull && sudo node --debug-brk main.js",
     "update": "git pull && npm install",
+    "interchange": "./node_modules/nodebots_interchange/bin/cli.js",
     "test": "eslint ."
   },
+  "bin": {"interchange": "./node_modules/nodebots_interchange/bin/cli.js","stella":"main.js"},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/justbill2020/smart-start.git"
   },
   "keywords": [
+    "Stella",
     "Smart Strip",
     "IoT",
     "WS2812b LED Strip",
@@ -33,7 +37,8 @@
     "johnny-five": "^0.10.6",
     "node-pixel": "^0.9.1",
     "raspi-io": "^7.2.3",
-    "nodebots-interchange":"^1.1.6"
+    "nodebots-interchange":"^1.1.6",
+    "blynk-library": "^0.4.5"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
