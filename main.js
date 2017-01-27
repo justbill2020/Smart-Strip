@@ -1,9 +1,12 @@
 var five = require("johnny-five");
 var pixel = require("node-pixel");
 var raspi = require("raspi-io");
+var {exec} = require('child_process')
 
+var foo
 let config
 let firstRun = false
+var currPattern = setStrip
 function logger (msg) {
     if (ready.blynk) {
         term.print(msg)
@@ -24,6 +27,14 @@ try {
       'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
   logger(error)
+}
+
+
+
+if (config.general && config.general.checkForUpdate) {
+    var updates = setInterval (function () {
+        exec("")
+    }, getInterval)
 }
 
 var ready = {}
@@ -96,7 +107,7 @@ var vLED = new blynk.WidgetLED(2)
 var v2
 v0.on('write', function(param) {
   logger('V0: ' + param);
-  setStrip(param == 1, myColor);
+  currPattern(param == 1, myColor);
 });
 v1.on('write', function(param) {
   logger('V1: ' + param);
@@ -107,11 +118,11 @@ v1.on('write', function(param) {
             v1.write(param)
         }
     }
-    setStrip(ready.blynkOn, param);
+    currPattern(ready.blynkOn, param);
   } else {
     myColor = strip.color() || "[0, 0, 0]"
     myColor = myColor.rgb
-    setStrip(false,myColor)
+    currPattern(false,myColor)
   }
 });
 term.on("write", function(param) {
@@ -125,4 +136,53 @@ blynk.on('connect', function() {
 blynk.on('disconnect', function() { 
     logger("DISCONNECT"); 
 });
+v4.on("write", function(param){
+    clearInterval(foo)
+    if (param == 1) {
+        currPattern = setStrip
+    }
+})
 }
+
+    function dynamicRainbow( delay ){
+        console.log( 'dynamicRainbow' );
+
+        var showColor;
+        var cwi = 0; // colour wheel index (current position on colour wheel)
+        foo = setInterval(function(){
+            if (++cwi > 255) {
+                cwi = 0;
+            }
+
+            for(var i = 0; i < strip.length; i++) {
+                showColor = colorWheel( ( cwi+i ) & 255 );
+                strip.pixel( i ).color( showColor );
+            }
+            strip.show();
+        }, 1000/delay);
+    }
+
+    // Input a value 0 to 255 to get a color value.
+    // The colors are a transition r - g - b - back to r.
+    function colorWheel( WheelPos ){
+        var r,g,b;
+        WheelPos = 255 - WheelPos;
+
+        if ( WheelPos < 85 ) {
+            r = 255 - WheelPos * 3;
+            g = 0;
+            b = WheelPos * 3;
+        } else if (WheelPos < 170) {
+            WheelPos -= 85;
+            r = 0;
+            g = WheelPos * 3;
+            b = 255 - WheelPos * 3;
+        } else {
+            WheelPos -= 170;
+            r = WheelPos * 3;
+            g = 255 - WheelPos * 3;
+            b = 0;
+        }
+        // returns a string with the rgb value to be used as the parameter
+        return "rgb(" + r +"," + g + "," + b + ")";
+    }
